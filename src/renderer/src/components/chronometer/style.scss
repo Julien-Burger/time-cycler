@@ -1,0 +1,17 @@
+.chronometer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    flex: 1;
+
+    .chrono {
+        display: flex;
+        align-items: center;
+        flex: 1;
+        color: #ffffff;
+        font-size: 34px;
+        font-weight: bold;
+        letter-spacing: 4px;
+    }
+}

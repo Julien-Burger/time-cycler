@@ -1,0 +1,160 @@
+.cycle {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    flex: 1;
+    margin-top: 12px;
+
+    .name {
+        font-weight: bold;
+        font-size: 16px;
+        letter-spacing: 1px;
+        color: #ffffff;
+        text-decoration: underline;
+        text-underline-offset: 3px;
+    }
+
+    .field {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        width: 100%;
+
+        .timer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 78%;
+
+            span {
+                color: #ffffff;
+                font-weight: bold;
+                font-size: 17px;
+            }
+
+            div {
+                display: flex;
+                border-radius: 20px;
+                padding: 8px;
+                background-color: #32363f;
+                cursor: pointer;
+                transition: all 0.2s;
+
+                &:hover {
+                    background-color: #373a41;
+                }
+
+                img {
+                    filter: invert(95%) sepia(5%) saturate(0%) hue-rotate(358deg) brightness(104%) contrast(108%);
+                    width: 12px;
+                    height: 12px;
+                }
+            }
+        }
+    }
+
+    .cycles {
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        color: #ffffff;
+
+        b {
+            font-size: 15px;
+        }
+
+        div {
+            display: flex;
+            gap: 5px;
+
+            span {
+                border: 1px solid transparent;
+                padding: 4px 7px 6px 8px;
+                border-radius: 20px;
+                font-size: 14px;
+                cursor: pointer;
+                transition: all 0.2s;
+
+                &:hover {
+                    border: 1px solid #b8b8b83d;
+                }
+
+                &.selected {
+                    border: 1px solid #ffffff;
+                }
+            }
+        }
+    }
+
+    /* Sets the containers height and width */
+    .baseTimer {
+        position: relative;
+        height: 160px;
+        width: 160px;
+
+        svg {
+            /* Flips the svg and makes the animation to move left-to-right */
+            transform: scaleX(-1);
+
+            /* Removes SVG styling that would hide the time label */
+            .circle {
+                fill: none;
+                stroke: none;
+
+                /* The SVG path that displays the timer's progress */
+                .path-elapsed {
+                    stroke-width: 7px;
+                    stroke: rgba(19, 145, 114, 0.247);
+                }
+
+                .path-remaining {
+                    /* Just as thick as the original ring */
+                    stroke-width: 7px;
+
+                    /* Rounds the line endings to create a seamless circle */
+                    stroke-linecap: round;
+
+                    /* Makes sure the animation starts at the top of the circle */
+                    transform: rotate(90deg);
+                    transform-origin: center;
+
+                    /* One second aligns with the speed of the countdown timer */
+                    transition: 1s linear all;
+
+                    /* Allows the ring to change color when the color value updates */
+                    stroke: currentColor;
+
+                    color: rgb(19, 145, 113);
+                }
+            }
+        }
+
+        .timeRemaining {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            color: #ffffff;
+            font-size: 32px;
+            top: -11px;
+            /* Size should match the parent container */
+            width: 160px;
+            height: 160px;
+        }
+
+        .currentCycle {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            color: #ffffff;
+            font-size: 13px;
+            top: 21px;
+            /* Size should match the parent container */
+            width: 160px;
+            height: 160px;
+        }
+    }
+}

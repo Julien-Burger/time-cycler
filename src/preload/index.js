@@ -1,3 +1,5 @@
-import { contextBridge } from "electron";
+import { contextBridge, ipcRenderer } from "electron/renderer";
 
-contextBridge.exposeInMainWorld("app", {});
+contextBridge.exposeInMainWorld("app", {
+    pinboard: () => ipcRenderer.send("pinboard"),
+});

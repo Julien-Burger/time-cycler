@@ -1,12 +1,13 @@
-import { app, shell, BrowserWindow } from "electron";
+import { app, shell, BrowserWindow, ipcMain } from "electron";
 import { join } from "path";
 
 const isDev = import.meta.env.DEV;
+let mainWindow;
 
 function createWindow() {
-    const mainWindow = new BrowserWindow({
-        width: 320,
-        height: 420,
+    mainWindow = new BrowserWindow({
+        width: 280,
+        height: 370,
         show: false,
         autoHideMenuBar: true,
         webPreferences: {
@@ -15,7 +16,7 @@ function createWindow() {
         },
         resizable: false,
     });
-    mainWindow.setAlwaysOnTop(true);
+
     mainWindow.on("ready-to-show", () => {
         mainWindow.show();
     });
@@ -35,6 +36,11 @@ function createWindow() {
 
 app.whenReady().then(() => {
     createWindow();
+
+    ipcMain.on("pinboard", () => {
+        mainWindow.setAlwaysOnTop(!mainWindow.isAlwaysOnTop());
+        mainWindow.setMovable(!mainWindow.isMovable());
+    });
 
     app.on("activate", function () {
         if (BrowserWindow.getAllWindows().length === 0) {
