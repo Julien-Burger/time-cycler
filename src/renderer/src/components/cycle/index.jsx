@@ -7,6 +7,7 @@ import minus from "../../assets/images/minus.svg";
 import pause from "../../assets/images/pause.svg";
 import play from "../../assets/images/play.svg";
 import startSFX from "../../assets/sfx/start.mp3";
+import endSFX from "../../assets/sfx/end.mp3";
 
 function Cycle() {
     const [periodTime, setPeriodTime] = useState(25);
@@ -18,6 +19,7 @@ function Cycle() {
     const [paused, setPaused] = useState(false);
     const [currentCycle, setCurrentCycle] = useState(1);
     const [isPeriod, setIsPeriod] = useState(true);
+    const [isReady, setIsReady] = useState(true);
 
     const handleClickChangePeriod = (time) => {
         if (periodTime + time === 65 || periodTime + time === 0) return;
@@ -38,13 +40,18 @@ function Cycle() {
         setPaused(false);
         setIsPeriod(true);
         setCurrentCycle(1);
+        setIsReady(true);
 
         const audio = new Audio(startSFX);
         audio.play();
     };
 
+    const handleClickReady = () => {
+        setIsReady(true);
+    };
+
     useEffect(() => {
-        if (!started || paused) return;
+        if (!started || paused || !isReady) return;
 
         const interval = setInterval(() => {
             setTimeLeft((value) => value - 1);
@@ -64,6 +71,9 @@ function Cycle() {
                 }
 
                 setIsPeriod(!isPeriod);
+                setIsReady(false);
+                const audio = new Audio(endSFX);
+                audio.play();
 
                 if (isPeriod) {
                     new window.Notification("Période finie !", { body: `La période du cycle ${currentCycle} est finie.` });
@@ -81,7 +91,7 @@ function Cycle() {
         return () => {
             clearInterval(interval);
         };
-    }, [started, timeLeft, paused]);
+    }, [started, timeLeft, paused, isReady]);
 
     const handleClickStop = () => {
         setStarted(false);
@@ -166,7 +176,13 @@ function Cycle() {
                                 ></path>
                             </g>
                         </svg>
-                        <span className={paused ? "timeRemaining stopped" : "timeRemaining"}>{formatTime()}</span>
+                        {isReady ? (
+                            <span className={paused ? "timeRemaining stopped" : "timeRemaining"}>{formatTime()}</span>
+                        ) : (
+                            <div className="ready">
+                                <button onClick={handleClickReady}>Prêt ?</button>
+                            </div>
+                        )}
                         <span className={paused ? "currentCycle stopped" : "currentCycle"}>
                             Cycle {currentCycle}/{cycles}
                         </span>

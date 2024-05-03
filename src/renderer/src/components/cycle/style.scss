@@ -131,30 +131,57 @@
             }
         }
 
-        .timeRemaining {
+        span {
             display: flex;
             align-items: center;
             justify-content: center;
             position: absolute;
             color: #ffffff;
-            font-size: 32px;
-            top: -11px;
             /* Size should match the parent container */
             width: 160px;
             height: 160px;
         }
 
+        .timeRemaining {
+            font-size: 32px;
+            top: -11px;
+        }
+
         .currentCycle {
+            font-size: 13px;
+            top: 21px;
+        }
+
+        .ready {
             display: flex;
             align-items: center;
             justify-content: center;
             position: absolute;
             color: #ffffff;
-            font-size: 13px;
-            top: 21px;
             /* Size should match the parent container */
             width: 160px;
             height: 160px;
+            top: 0;
+
+            button {
+                display: flex;
+                align-items: center;
+                border: none;
+                color: #ffffff;
+                font-weight: bold;
+                font-size: 15px;
+                border-radius: 20px;
+                padding: 10px 20px;
+                background-color: #32363f;
+                cursor: pointer;
+                margin-bottom: 25px;
+                z-index: 10;
+                transition: all 0.2s;
+
+                &:hover {
+                    background-color: #373a41;
+                }
+            }
         }
     }
 }

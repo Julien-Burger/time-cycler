@@ -1,5 +1,13 @@
 # Changelog
 
+## v1.3.0
+
+### Améliorations/Ajouts
+
+-   A la fin de chaque période / pause un bouton doit être cliqué pour lancer la suite
+-   Ajout d'un icone d'application
+-   Ajout d'un son quand une période / pause se termine
+
 ## v1.2.0
 
 ### Améliorations/Ajouts
