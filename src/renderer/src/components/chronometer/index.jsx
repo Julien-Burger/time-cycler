@@ -6,8 +6,8 @@ import pause from "../../assets/images/pause.svg";
 import play from "../../assets/images/play.svg";
 
 function Chronometer() {
-    const [started, setStarted] = useState(false);
-    const [paused, setPaused] = useState(false);
+    const [isStarted, setStarted] = useState(false);
+    const [isPaused, setPaused] = useState(false);
     const [timer, setTimer] = useState(0);
 
     const handleClickStart = () => {
@@ -21,11 +21,15 @@ function Chronometer() {
     };
 
     const handleClickPause = () => {
-        setPaused(!paused);
+        setPaused(!isPaused);
+    };
+
+    const handleClickErease = () => {
+        setTimer(0);
     };
 
     useEffect(() => {
-        if (!started || paused) return;
+        if (!isStarted || isPaused) return;
 
         const interval = setInterval(() => {
             setTimer((value) => value + 1);
@@ -34,7 +38,7 @@ function Chronometer() {
         return () => {
             clearInterval(interval);
         };
-    }, [started, paused]);
+    }, [isStarted, isPaused]);
 
     const formatTimer = () => {
         const hours = Math.floor(timer / 360000)
@@ -53,16 +57,17 @@ function Chronometer() {
 
     return (
         <div className="chronometer">
-            <span className={paused ? "chrono stopped" : "chrono"}>{formatTimer()}</span>
-            {!started ? (
+            <span className={isPaused ? "chrono stopped" : "chrono"}>{formatTimer()}</span>
+            {!isStarted ? (
                 <div className="actions">
                     <button onClick={handleClickStart}>Commencer</button>
+                    {timer > 0 && <button onClick={handleClickErease}>Effacer</button>}
                 </div>
             ) : (
                 <div className="actions">
                     <button onClick={handleClickStop}>Arrêter</button>
                     <button onClick={handleClickPause}>
-                        <img src={paused ? play : pause} />
+                        <img src={isPaused ? play : pause} />
                     </button>
                 </div>
             )}

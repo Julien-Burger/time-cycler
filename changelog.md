@@ -1,14 +1,26 @@
 # Changelog
 
-## TODO
+## v1.2.0
 
--   Ajouter des sons quand les timers arrivent à la fin
+### Améliorations/Ajouts
+
+-   Ajout de **notifications** :
+    -   Quand une période se termine
+    -   Quand une pause se termine
+    -   Quand tous les cycles sont terminés
+-   Ajout d'un son au lancement du premier cycle
+-   Ajout d'un nouvel icon pour bloquer le mouvement de la fenêtre
+-   Ajout d'un bouton **Effacer** dans la catégorie **chronomètre** pour remettre à zéro le chronomètre
+
+### Changements
+
+-   Le bouton "punaise" ne bloque plus le mouvement de la fenêtre
 
 ## v1.1.0
 
 ### Améliorations/Ajouts
 
--   Ajout d'un bouton pour permettre de garder la fenêtre au dessus de toutes les autres
+-   Ajout d'un bouton pour permettre de garder la fenêtre au dessus de toutes les autres. Ce bouton bloque également le déplacement de la fenêtre
 -   Ajout d'un **chronomètre**
 
 ### Changements

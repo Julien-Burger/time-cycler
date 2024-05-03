@@ -39,6 +39,9 @@ app.whenReady().then(() => {
 
     ipcMain.on("pinboard", () => {
         mainWindow.setAlwaysOnTop(!mainWindow.isAlwaysOnTop());
+    });
+
+    ipcMain.on("lock-window", () => {
         mainWindow.setMovable(!mainWindow.isMovable());
     });
 

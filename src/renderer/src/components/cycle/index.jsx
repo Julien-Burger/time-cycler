@@ -6,6 +6,7 @@ import plus from "../../assets/images/plus.svg";
 import minus from "../../assets/images/minus.svg";
 import pause from "../../assets/images/pause.svg";
 import play from "../../assets/images/play.svg";
+import startSFX from "../../assets/sfx/start.mp3";
 
 function Cycle() {
     const [periodTime, setPeriodTime] = useState(25);
@@ -37,6 +38,9 @@ function Cycle() {
         setPaused(false);
         setIsPeriod(true);
         setCurrentCycle(1);
+
+        const audio = new Audio(startSFX);
+        audio.play();
     };
 
     useEffect(() => {
@@ -52,12 +56,22 @@ function Cycle() {
             if (t < 0) {
                 if ((cycles === 1 || currentCycle + 1 > cycles) && !isPeriod) {
                     setStarted(false);
+
+                    new window.Notification("Cycle terminé !", { body: "Tous les cycles sont finis." });
                     return;
                 } else if (!isPeriod) {
                     setCurrentCycle((value) => value + 1);
                 }
 
                 setIsPeriod(!isPeriod);
+
+                if (isPeriod) {
+                    new window.Notification("Période finie !", { body: `La période du cycle ${currentCycle} est finie.` });
+                } else {
+                    new window.Notification("Pause finie !", {
+                        body: `La pause du cycle ${currentCycle} est finie. Début du prochain cycle.`,
+                    });
+                }
 
                 usedTime = !isPeriod ? periodTime : breakTime;
                 setTimeLeft(usedTime * 60);

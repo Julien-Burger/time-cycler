@@ -1,0 +1,42 @@
+.menuBar {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+
+    div {
+        display: flex;
+        gap: 5px;
+
+        button {
+            font-family: "Lucida Console";
+            color: rgba(255, 255, 245, 0.86);
+            background-color: #202127;
+            padding: 8px 12px;
+            border-radius: 22px;
+            cursor: pointer;
+            border: 1px solid #33353d;
+            transition: all 0.2s;
+
+            &:first-child {
+                margin-right: 5px;
+            }
+
+            &:hover {
+                background-color: #2d2f35;
+                border-color: #33353d;
+            }
+        }
+
+        .selected {
+            background-color: #2d2f35;
+            border-color: #33353d;
+        }
+    }
+
+    img {
+        filter: invert(95%) sepia(5%) saturate(0%) hue-rotate(358deg) brightness(104%) contrast(108%);
+        width: 16px;
+        height: 16px;
+        cursor: pointer;
+    }
+}
